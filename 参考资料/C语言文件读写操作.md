@@ -2,7 +2,7 @@
 
 > 作者：[放码过来呀！！！](https://blog.csdn.net/m0_46671092)
 > 时间：2020 / 07 / 21 - 23:02:51
-> 原帖地址：[CSDN](https://blog.csdn.net/m0_46671092/article/details/107498443)
+> 链接：[CSDN](https://blog.csdn.net/m0_46671092/article/details/107498443)
 
 ## 数据流和缓冲区是什么？文件类型和文件存取方式都有啥？
 
