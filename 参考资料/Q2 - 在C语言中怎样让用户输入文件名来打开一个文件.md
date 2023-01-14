@@ -20,14 +20,14 @@
         printf("请输入你要打开的文件名及路径，如c:\\temp.txt\n");
         gets(filename);         //这句要用户输入文件名
 
-        if ((fp=fopen(filename,"r"))==NULL){        //打开文件，并判断是否有打开错误
+        if ((fp = fopen(filename, "r")) == NULL){   //打开文件，并判断是否有打开错误
             printf("打开文件%s出现错误\n",filename);
             return 0;
         }
 
         //以下显示文件内容
-        while(fgets(tempstr,1024,fp)!=NULL) //读文件一行内容，最多1024字符到缓冲区，并判断是否文件已经结束 
-            printf("%s",tempstr);   //显示缓冲区内容
+        while(fgets(tempstr, 1024, fp) != NULL)     //读文件一行内容，最多1024字符到缓冲区，并判断是否文件已经结束 
+            printf("%s", tempstr);  //显示缓冲区内容
         fclose(fp);                 //关闭文件
     }
 
