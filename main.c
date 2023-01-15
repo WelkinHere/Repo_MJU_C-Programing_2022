@@ -4,6 +4,7 @@
 // 自定义函数
 
 // 文件长度获取
+// 参数：文件指针
 long int getFileSize(FILE *fp) {
     long int fileSize;          // 文件长度
 
@@ -15,7 +16,7 @@ long int getFileSize(FILE *fp) {
 }
 
 // [Y/N] 过滤器
-// userInput 是用户在确认进入数据录入环节的输入
+// 参数：要过滤的字符变量
 void filter_YN(char userInput) {
     int flag_InputValid = 0;    // 默认值为 0 ，用户输入合法的话就会变为 1
 
