@@ -14,7 +14,38 @@ long int getFileSize(FILE *fp) {
     return fileSize;            // 返回文件长度
 }
 
+// [Y/N] 过滤器
+// userInput 是用户在确认进入数据录入环节的输入
+void filter_YN(char userInput) {
+    int flag_InputValid = 0;    // 默认值为 0 ，用户输入合法的话就会变为 1
+
+    do{
+        scanf("%c", &userInput);
+
+        if(userInput == "Y") {
+            flag_InputValid = 1;
+        } else if (userInput == "N") {
+            flag_InputValid = 1;
+        } else {
+            printInputInvalid(1);
+        }
+    } while(flag_InputValid == 1);
+}
+
 // 自定义输出 - 提示信息
+
+// 通用 - 输入不合法 - 自定义提示
+// 参数： 0 - 正常输入提示 / 1 - 确定[Y/N]输入提示
+void printInputInvalid(int tipStatus) {
+    printf("┌────────────────────────────────────────────────────────────────┐\n");
+    printf("│　　　　　　　　　　 输入不合法，请重新输入 　　　　　　　　　　│\n");
+    printf("└────────────────────────────────────────────────────────────────┘\n");
+    if(tipStatus == 0) {
+        printf("输入选项以继续: ");
+    } else if (tipStatus == 1) {
+        printf("输入选项以继续[Y/N]: ");
+    }
+}
 
 // 层 1 - 提示信息 - 自定义提示
 void printIntro() {
@@ -84,7 +115,7 @@ void printEditWarn() {
     printf("┌───────────────────────────────┐┌───────────────────────────────┐\n");
     printf("│　　　　　　[Y]  是　　　　　　││　　　　　　[N]  否　　　　　　│\n");
     printf("└───────────────────────────────┘└───────────────────────────────┘\n");
-    printf("请输入对应选项[Y/N]: ");
+    printf("输入选项以继续[Y/N]: ");
 }
 
 // 层 4 - 数据库操作 - 自定义提示
@@ -159,8 +190,11 @@ int main() {
             // 检测文件长度，如果文件为空的话直接进入数据录入
             // 不为空的话输出编辑提示
             if(getFileSize(fp) == 0) {
-                char userInput;     // 用户在确认进入数据录入环节的输入
+                char userInput;                 // 用户在确认进入数据录入环节的输入
 
+                printEditWarn();
+
+                filter_YN(userInput);
             } else {
                 printEditHint();
             }
