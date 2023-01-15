@@ -123,15 +123,16 @@ void printEditHint(char name[33]) {
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　学生信息管理系统　－　数据库操作　　　　　　　　│\n");
     printf("├────────────────────────────────────────────────────────────────┤\n");
-    printf("│　　　　　　　　　[1] - 向数据库末尾录入新内容　　　　　　　　│\n");
-    printf("│　　　　　　　　　[2] - 查找指定项目　　　　　　　　　　　　　│\n");
-    printf("│　　　　　　　　　[0] - 关闭数据库　　　　　　　　　　　　　　│\n");
+    printf("│　　　　　　　　 [1] - 向数据库末尾录入新内容 　　　　　　　　│\n");
+    printf("│　　　　　　　　 [2] - 查找或修改指定项目 　　　　　　　　　　│\n");
+    printf("│　　　　　　　　 [0] - 关闭数据库 　　　　　　　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
     printf("当前操作的数据库：%s\n", name);
     printf("输入选项以继续: ");
 }
 
 int main() {
+    // 层 1 - 用户输入
     int introInput = -1;
     do{
         // 输出程序提示文字并获取用户输入
@@ -187,17 +188,40 @@ int main() {
 
         // 打开文件后的操作
         if(flag_openSuccess == 1) {
-            // 检测文件长度，如果文件为空的话直接进入数据录入
-            // 不为空的话输出编辑提示
-            if(getFileSize(fp) == 0) {
-                char userInput;                 // 用户在确认进入数据录入环节的输入
+            // 层 4 - 用户输入
+            int editInput = -1;
 
-                printEditWarn();
+            // 这里套个 do while 循环，来实现操作结束后重复返回编辑界面的能力
+            do {
+                // 检测文件长度，如果文件为空的话直接进入数据录入
+                // 不为空的话输出编辑提示
+                if(getFileSize(fp) == 0) {
+                    char userInput;                 // 用户在确认进入数据录入环节的输入
 
-                filter_YN(userInput);
-            } else {
-                printEditHint();
-            }
+                    printEditWarn();
+
+                    filter_YN(userInput);           // 过滤确定和取消
+
+                    // 如果用户输入的是 Y 则进入数据录入（直接修改用户的输入进入编辑模式）
+                    // 用户输入的是 N 的话手动补充一个界面提示
+                    if(userInput == "Y") {
+                        editInput = 1;
+                    } else {
+                        printEditHint();
+                        scanf("%d", &editInput);
+                    }
+                } else {
+                    printEditHint();
+                    scanf("%d", &editInput);
+                }
+
+                // 根据不同的用户输入，我们进入不同的功能
+                if(editInput == 1) {
+                    // 录入数据
+                } else if(editInput == 2) {
+                    // 查找数据
+                }
+            } while (editInput != 0)
         }
     } while(introInput != 0);
 
