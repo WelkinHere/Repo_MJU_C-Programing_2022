@@ -1,7 +1,20 @@
 #include <stdio.h>
 #include <string.h>
 
-// 自定义函数 - 内容
+// 自定义函数
+
+// 文件长度获取
+long int getFileSize(FILE *fp) {
+    long int fileSize;          // 文件长度
+
+    fseek(fp, 0, SEEK_END);     // 移动指针到达最后一行
+    fileSize = ftell(fp);       // 获取文件长度
+    fseek(fp, 0, SEEK_SET);     // 还原指针到文件开头
+
+    return fileSize;            // 返回文件长度
+}
+
+// 自定义输出 - 提示信息
 
 // 层 1 - 提示信息 - 自定义提示
 void printIntro() {
@@ -118,7 +131,7 @@ int main() {
 
             // 这个 if 用来检测打开数据库的时候有没有发生错误
             // 有发生错误的话输出错误提示
-            // 没有错误的话输出进一步操作的提示
+            // 没有发生错误的话输出成功提示
             if(fp == NULL) {
                 printOpenFail();
             } else {
@@ -129,7 +142,10 @@ int main() {
 
         // 打开文件后的操作
         if(flag_openSuccess == 1) {
-
+            // 检测文件长度，如果文件为空的话直接进入数据录入
+            if(getFileSize(fp) == 0) {
+                
+            }
         }
     } while(introInput != 0);
 
