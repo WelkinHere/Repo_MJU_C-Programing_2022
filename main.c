@@ -11,6 +11,19 @@ struct example {
 
 // 自定义函数
 
+// 文件行数获取
+// 参数：文件指针
+int getFileLine(FILE *fp) {
+    int fileSize = 0;           // 文件长度，整型值
+    char buffer[512];           // 缓冲区
+
+    while(fgets(buffer, 512, fp) != NULL) {
+        fileSize++;
+    }
+
+    return fileSize;
+}
+
 // 文件长度获取
 // 参数：文件指针
 long int getFileSize(FILE *fp) {
@@ -320,11 +333,7 @@ int main() {
                     } else {
                         // 不为空的话我们初始化一下所有的信息
                         // 比如数据库内已经有了多少数据
-                        char buffer[128];       //缓冲区
-                        while (fgets(buffer, 32, fp) != NULL) {
-                            DBSum++;
-                        }
-                        DBSum -= 2;             // 最后删除掉格式里面的开头结尾
+                        DBSum = getFileLine(fp) - 2;             // 最后删除掉格式里面的开头结尾
                     }
 
                     printInputStart();
@@ -356,12 +365,14 @@ int main() {
                             printInputSuccess();
                             i++;
                         }   // 如果选择不保留则重新开始循环
-
-                        // 录入结束的时候输出消息
-                        printInputFinish();
                     } while(i < studentSum - 1);
+
+                    // 录入结束的时候输出消息
+                    printInputFinish();
                 } else if(editInput == 2) {
                     // 查找数据
+
+                    // 第一步，获取这个数据库有多少东西
                 } else if(editInput == 3) {
                     // 统计数据
                 }
