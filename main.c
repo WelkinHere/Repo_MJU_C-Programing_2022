@@ -1,6 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 
+// 结构体 - 用于学生信息存储
+struct example {
+    int DB_ID;          // 数据库的编号
+    char STU_ID[33];    // 学生的学号
+    char STU_name[65];  // 学生的姓名
+    int STU_score;      // 学生的成绩
+};
+
 // 自定义函数
 
 // 文件长度获取
@@ -126,10 +134,22 @@ void printEditHint(char name[33]) {
     printf("├────────────────────────────────────────────────────────────────┤\n");
     printf("│　　　　　　　　 [1] - 向数据库末尾录入新内容 　　　　　　　　│\n");
     printf("│　　　　　　　　 [2] - 查找或修改指定项目 　　　　　　　　　　│\n");
+    printf("│　　　　　　　　 [3] - 数据库统计信息 　　　　　　　　　　　　│\n");
     printf("│　　　　　　　　 [0] - 关闭数据库 　　　　　　　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
     printf("当前操作的数据库：%s\n", name);
     printf("输入选项以继续: ");
+}
+
+// 层 5 - 数据库录入 - 学生数量 - 自定义提示
+void printInputSum(char name[33]) {
+    printf("┌────────────────────────────────────────────────────────────────┐\n");
+    printf("│　　　　　　　　学生信息管理系统　－　数据库录入　　　　　　　　│\n");
+    printf("├────────────────────────────────────────────────────────────────┤\n");
+    printf("│　　　　　　　　　　 请输入要录入的学生总数 　　　　　　　　　　│\n");
+    printf("└────────────────────────────────────────────────────────────────┘\n");
+    printf("当前操作的数据库：%s\n", name);
+    printf("输入数量以继续: ");
 }
 
 int main() {
@@ -200,7 +220,6 @@ int main() {
                     char userInput;                 // 用户在确认进入数据录入环节的输入
 
                     printEditWarn();
-
                     filter_YN(userInput);           // 过滤确定和取消
 
                     // 如果用户输入的是 Y 则进入数据录入（直接修改用户的输入进入编辑模式）
@@ -208,21 +227,43 @@ int main() {
                     if(userInput == "Y") {
                         editInput = 1;
                     } else {
-                        printEditHint();
+                        printEditHint(DBinput);
                         scanf("%d", &editInput);
                     }
                 } else {
-                    printEditHint();
+                    printEditHint(DBinput);
                     scanf("%d", &editInput);
                 }
 
                 // 根据不同的用户输入，我们进入不同的功能
                 if(editInput == 1) {
                     // 录入数据
+
+                    // 变量
+                    int studentSum = 0;
+
+                    // 提示操作并获取要录入的学生总数
+                    printInputSum(DBinput);
+                    scanf("%d", &studentSum);
+
+                    // 初始化结构体数组
+                    struct example student[studentSum];
+
+                    // 如果数据库为空则录入一下格式模板
+                    if(getFileSize(fp) == 0) {
+                        fprintf(fp, "- Start -\n");     // 文件开头
+                        fprintf(fp, "%d", studentSum);  // 数据总数
+                        fprintf(fp, "-  End  -");       // 文件结尾
+                    }
+
+                    // 循环获取录入的学生数据
+                    
                 } else if(editInput == 2) {
                     // 查找数据
+                } else if(editInput == 3) {
+                    // 统计数据
                 }
-            } while (editInput != 0)
+            } while (editInput != 0);
         }
     } while(introInput != 0);
 
