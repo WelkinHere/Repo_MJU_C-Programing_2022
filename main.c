@@ -91,6 +91,13 @@ void printOpenDB() {
     printf("请输入要打开的数据库名称（最大长度限制 32 字符）: ");
 }
 
+// 层 3 - 创建数据库 失败 - 自定义提示
+void printNewFail() {
+    printf("┌────────────────────────────────────────────────────────────────┐\n");
+    printf("│　　　　　　　创建数据库失败，请更换您的数据库名称　　　　　　　│\n");
+    printf("└────────────────────────────────────────────────────────────────┘\n");
+}
+
 // 层 3 - 创建数据库 成功 - 自定义提示
 void printNewSuccess() {
     printf("┌────────────────────────────────────────────────────────────────┐\n");
@@ -165,8 +172,18 @@ int main() {
 
         // 根据输入输出不同的提示
         if(introInput == 1) {
-            printNewDB();
-            scanf("%s", DBinput);
+            // 一个标识符，如果这个名字可以被创建则为 1 反之为 0
+            int flag_new = 0;
+            do{
+                printNewDB();
+                scanf("%s", DBinput);
+
+                if(DBinput == "DBcache") {
+                    printNewFail();
+                } else {
+                    flag_new = 1;
+                }
+            } while(flag_new != 1);
         } else if(introInput == 2) {
             printOpenDB();
             scanf("%s", DBinput);
@@ -239,7 +256,7 @@ int main() {
                 if(editInput == 1) {
                     // 录入数据
 
-                    // 变量
+                    // 变量 - 学生总数
                     int studentSum = 0;
 
                     // 提示操作并获取要录入的学生总数
@@ -247,6 +264,7 @@ int main() {
                     scanf("%d", &studentSum);
 
                     // 初始化结构体数组
+                    // 用于录入学生信息的临时存储
                     struct example student[studentSum];
 
                     // 如果数据库为空则录入一下格式模板
