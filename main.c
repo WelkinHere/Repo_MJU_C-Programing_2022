@@ -301,8 +301,9 @@ int main() {
                 if(editInput == 1) {
                     // 录入数据
 
-                    // 变量 - 学生总数
-                    int studentSum = 0;
+                    // 变量
+                    int studentSum = 0;     // 学生总数
+                    int DBSum = 0;          // 数据库条目总数
 
                     // 提示操作并获取要录入的学生总数
                     printInputSum(DBinput);
@@ -316,6 +317,14 @@ int main() {
                     if(getFileSize(fp) == 0) {
                         fprintf(fp, "- Start -\n");     // 文件开头
                         fprintf(fp, "-  End  -");       // 文件结尾
+                    } else {
+                        // 不为空的话我们初始化一下所有的信息
+                        // 比如数据库内已经有了多少数据
+                        char buffer[128];       //缓冲区
+                        while (fgets(buffer, 32, fp) != NULL) {
+                            DBSum++;
+                        }
+                        DBSum -= 2;             // 最后删除掉格式里面的开头结尾
                     }
 
                     printInputStart();
@@ -341,8 +350,8 @@ int main() {
 
                         if(userInput == "Y") {
                             fseek(fp, 9, SEEK_END);             // 移动指针位置到达 “-  End  -” 前面
-                            fprintf(fp, "%d - %s %s %d\n", student[i].STU_ID, student[i].STU_name, student[i].STU_score);
-                            
+                            fprintf(fp, "[%d] - <%s> {%s} [%d]\n", i + DBSum + 1, student[i].STU_ID, student[i].STU_name, student[i].STU_score);
+
                             // 成功后输出提示并给循环计数器 +1
                             printInputSuccess();
                             i++;
@@ -350,7 +359,7 @@ int main() {
 
                         // 录入结束的时候输出消息
                         printInputFinish();
-                    } while(i < studentSum);
+                    } while(i < studentSum - 1);
                 } else if(editInput == 2) {
                     // 查找数据
                 } else if(editInput == 3) {
