@@ -35,6 +35,12 @@ void filter_YN(char userInput) {
             flag_InputValid = 1;
         } else if (userInput == "N") {
             flag_InputValid = 1;
+        } else if (userInput = "y") {
+            userInput = "Y";
+            flag_InputValid = 1;
+        } else if (userInput = "n") {
+            userInput = "N";
+            flag_InputValid = 1;
         } else {
             printInputInvalid(1);
         }
@@ -159,6 +165,45 @@ void printInputSum(char name[33]) {
     printf("输入数量以继续: ");
 }
 
+// 层 5 - 数据库录入 开始 - 自定义提示
+void printInputStart() {
+    printf("┌────────────────────────────────────────────────────────────────┐\n");
+    printf("│　　　　　　　　　　　　 数据库录入开始 　　　　　　　　　　　　│\n");
+    printf("└────────────────────────────────────────────────────────────────┘\n");
+}
+
+// 层 5 - 数据库录入 提示 - 自定义提示
+void printInputTip(char id[33], char name[65], int score) {
+    printf("┌────────────────────────────────────────────────────────────────┐\n");
+    printf("│　　　　　　　　　　　　请确认录入的数据　　　　　　　　　　　　│\n");
+    printf("└────────────────────────────────────────────────────────────────┘\n");
+    printf("当前操作的学生学号：%s\n", id);
+    printf("当前操作的学生姓名：%s\n", name);
+    printf("当前操作的学生成绩：%d\n", score);
+    printf("┌────────────────────────────────────────────────────────────────┐\n");
+    printf("│　　　　　　　　　　　　是否录入本次数据　　　　　　　　　　　　│\n");
+    printf("└────────────────────────────────────────────────────────────────┘\n");
+    printf("┌───────────────────────────────┐┌───────────────────────────────┐\n");
+    printf("│　　　　　　[Y]  是　　　　　　││　　　　　　[N]  否　　　　　　│\n");
+    printf("└───────────────────────────────┘└───────────────────────────────┘\n");
+    printf("输入选项以继续[Y/N]: ");
+
+}
+
+// 层 5 - 数据库录入 成功 - 自定义提示
+void printInputSuccess() {
+    printf("┌────────────────────────────────────────────────────────────────┐\n");
+    printf("│　　　　　　　　　　　　　录入数据成功　　　　　　　　　　　　　│\n");
+    printf("└────────────────────────────────────────────────────────────────┘\n");
+}
+
+// 层 5 - 数据库录入 结束 - 自定义提示
+void printInputFinish() {
+    printf("┌────────────────────────────────────────────────────────────────┐\n");
+    printf("│　　　　　　　　　　　　 数据库录入结束 　　　　　　　　　　　　│\n");
+    printf("└────────────────────────────────────────────────────────────────┘\n");
+}
+
 int main() {
     // 层 1 - 用户输入
     int introInput = -1;
@@ -270,12 +315,42 @@ int main() {
                     // 如果数据库为空则录入一下格式模板
                     if(getFileSize(fp) == 0) {
                         fprintf(fp, "- Start -\n");     // 文件开头
-                        fprintf(fp, "%d", studentSum);  // 数据总数
                         fprintf(fp, "-  End  -");       // 文件结尾
                     }
 
+                    printInputStart();
+
                     // 循环获取录入的学生数据
-                    
+                    int i = 0; // 循环计数器
+                    do {
+                        // 先把数据库录入到内存中
+                        student[i].DB_ID = i + 1;
+                        printf("请输入第 %d / %d 个学生的 学号 ：", i + 1, studentSum);
+                        scanf("%s", student[i].STU_ID);
+                        printf("请输入第 %d / %d 个学生的 姓名 ：", i + 1, studentSum);
+                        scanf("%s", student[i].STU_name);
+                        printf("请输入第 %d / %d 个学生的 成绩 ：", i + 1, studentSum);
+                        scanf("%s", student[i].STU_score);
+
+                        // 然后再输出录入的结果
+                        printInputTip(student[i].STU_ID, student[i].STU_name, student[i].STU_score);
+
+                        // 询问用户是否保留此次数据
+                        char userInput;
+                        filter_YN(userInput);
+
+                        if(userInput == "Y") {
+                            fseek(fp, 9, SEEK_END);             // 移动指针位置到达 “-  End  -” 前面
+                            fprintf(fp, "%d - %s %s %d\n", student[i].STU_ID, student[i].STU_name, student[i].STU_score);
+                            
+                            // 成功后输出提示并给循环计数器 +1
+                            printInputSuccess();
+                            i++;
+                        }   // 如果选择不保留则重新开始循环
+
+                        // 录入结束的时候输出消息
+                        printInputFinish();
+                    } while(i < studentSum);
                 } else if(editInput == 2) {
                     // 查找数据
                 } else if(editInput == 3) {
