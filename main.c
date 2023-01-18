@@ -11,6 +11,16 @@ struct example {
 
 // 自定义函数
 
+// 更换开启状态
+// 用途：把 0 变成 1，把除了 1 以外的数都变成 0.
+void toggle(int value) {
+    if(value == 0) {
+        value = 1;
+    } else {
+        value = 0;
+    }
+}
+
 // 文件行数获取
 // 参数：文件指针
 int getFileLine(FILE *fp) {
@@ -307,6 +317,39 @@ void printEditTips(char name[33]) {
     printf("当前操作的数据库：%s\n", name);
     printf("输入选项以继续: ");
 }
+
+// 层 6 - 数据库编辑 - 自定义提示
+void printEditContent(int EditID, int EditName, int EditScore) {
+    printf("┌────────────────────────────────────────────────────────────────┐\n");
+    printf("│　　　　　　　　学生信息管理系统　－　数据库编辑　　　　　　　　│\n");
+    printf("├────────────────────────────────────────────────────────────────┤\n");
+    printf("│　　　　　　　　　　　　请选择修改的内容　　　　　　　　　　　　│\n");
+    printf("├────────────────────────────────────────────────────────────────┤\n");
+
+    if(EditID == 0){
+        printf("│　　　　　　　　　　 [1] - 修改学生学号 　　　　　　　　　　　│\n");
+    } else {
+        printf("│　　　　　　　 [1] - 修改学生学号 - [已选中] 　　　　　　　　│\n");
+    }
+    
+    if(EditName == 0){
+        printf("│　　　　　　　　　　 [2] - 修改学生姓名 　　　　　　　　　　　│\n");
+    } else {
+        printf("│　　　　　　　 [2] - 修改学生姓名 - [已选中] 　　　　　　　　│\n");
+    }
+    
+    if(EditScore == 0){
+        printf("│　　　　　　　　　　 [3] - 修改学生成绩 　　　　　　　　　　　│\n");
+    } else {
+        printf("│　　　　　　　 [3] - 修改学生成绩 - [已选中] 　　　　　　　　│\n");
+    }
+    
+    printf("│　　　　　　　　　　 [4] - 开始信息修改 　　　　　　　　　　　│\n");
+    printf("│　　　　　　　　　　 [0] - 退出修改 　　　　　　　　　　　　　│\n");
+    printf("└────────────────────────────────────────────────────────────────┘\n");
+    printf("输入选项以继续: ");
+}
+
 
 int main() {
     // 层 1 - 用户输入
@@ -625,6 +668,43 @@ int main() {
 
                                     if(DBEditInput == 1) {
                                         // 修改指定的内容
+
+                                        // 输出修改提示（循环）
+                                        int DBEditContentInput = -1;    // 用户输入
+                                        int EditID = 0;                 // 修改学号的标识符
+                                        int EditName = 0;               // 修改姓名的标识符
+                                        int EditScore = 0;              // 修改成绩的标识符
+
+                                        do {
+                                            printEditContent(EditID, EditName, EditScore);
+
+                                            scanf("%d", &DBEditContentInput);
+
+                                            if (DBEditContentInput == 1) {
+                                                toggle(EditID);
+                                            } else if (DBEditContentInput == 2) {
+                                                toggle(EditName);
+                                            } else if (DBEditContentInput == 3) {
+                                                toggle(EditScore);
+                                            } else if (DBEditContentInput == 4) {
+                                                // 进入编辑模式
+
+                                                // 思路是把要修改的东西先放到 temp 里面
+                                                // 然后在创建一个全新的 DBcache 文件（一开始创建文件保留的那个关键字）
+                                                // 向 DBcache 里面写入其他不用修改的内容
+                                                // 在写入时把修改的那一个插入进去
+                                                // 就可以完成这个修改的操作
+
+                                                // 首先我们创建一个文件
+                                                FILE *DBcache;
+                                                DBcache = fopen("DBcache", "w+");
+
+                                                // 然后把原先文件的内容给加载到新的缓存文件内
+                                                for(int i = 0; i < searchInput; i++) {
+
+                                                }
+                                            }
+                                        } while(DBEditContentInput != 0);
                                     } else if(DBEditInput == 2) {
                                         // 删除指定的内容
                                     } else if(DBEditInput == 3) {
