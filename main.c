@@ -217,6 +217,97 @@ void printInputFinish() {
     printf("└────────────────────────────────────────────────────────────────┘\n");
 }
 
+// 层 5 - 数据库查询 - 自定义提示
+void printSearchTips(char name[33]) {
+    printf("┌────────────────────────────────────────────────────────────────┐\n");
+    printf("│　　　　　　　　学生信息管理系统　－　数据库查询　　　　　　　　│\n");
+    printf("├────────────────────────────────────────────────────────────────┤\n");
+    printf("│　　　　　　　　　　　　请选择查询的方式　　　　　　　　　　　　│\n");
+    printf("├────────────────────────────────────────────────────────────────┤\n");
+    printf("│　　　　　　　　　 [1] - 通过学号查询 　　　　　　　　　　　　│\n");
+    printf("│　　　　　　　　　 [2] - 通过姓名查询 　　　　　　　　　　　　│\n");
+    printf("│　　　　　　　　　 [3] - 通过数据库编号查询 　　　　　　　　　│\n");
+    printf("│　　　　　　　　　 [0] - 退出查询 　　　　　　　　　　　　　　│\n");
+    printf("└────────────────────────────────────────────────────────────────┘\n");
+    printf("当前操作的数据库：%s\n", name);
+    printf("输入选项以继续: ");
+}
+
+// 层 5 - 数据库查询方式 - 自定义提示
+// 参数：1 - 学号查询内容 / 2 - 姓名查询内容 / 3 - 数据库编号查询
+void printSearchInput(int type) {
+    printf("┌────────────────────────────────────────────────────────────────┐\n");
+    printf("│　　　　　　　　学生信息管理系统　－　数据库查询　　　　　　　　│\n");
+    printf("├────────────────────────────────────────────────────────────────┤\n");
+
+    if(type == 1) {
+        printf("│　　　　　　　　　　　　　通过学号查询　　　　　　　　　　　　　│\n");
+        printf("└────────────────────────────────────────────────────────────────┘\n");
+    } else if (type == 2) {
+        printf("│　　　　　　　　　　　　　通过姓名查询　　　　　　　　　　　　　│\n");
+        printf("└────────────────────────────────────────────────────────────────┘\n");
+    } else if (type == 3) {
+        printf("│　　　　　　　　　　　 通过数据库编号查询 　　　　　　　　　　　│\n");
+        printf("└────────────────────────────────────────────────────────────────┘\n");
+    }
+
+    printf("输入查询内容以继续: ");
+}
+
+// 层 5 - 数据库查询结果 - 自定义提示
+// 参数：整形值，用于显示搜索结果数目
+void printSearchResult(int count) {
+    printf("┌────────────────────────────────────────────────────────────────┐\n");
+    printf("│　　　　　　　　学生信息管理系统　－　数据库查询　　　　　　　　│\n");
+    printf("└────────────────────────────────────────────────────────────────┘\n");
+    printf("查询完毕，共计 %d 条匹配的项目。\n", count);
+
+    if(count > 1) {
+        printf("是否显示详细查询结果 [Y/N] ：");
+    }
+}
+
+// 层 5 - 数据库查询详细 - 自定义提示
+// 参数：传入要展示的 数据库编号 / 学号 / 姓名 / 成绩
+void printSearchDetail(int PrintNum, int PrintSum, int DBnum, char STU_ID[33], char STU_name[65], int STU_score) {
+    printf("\n查询结果 %d / %d : \n", PrintNum, PrintSum);
+    printf("━┳━　数据库编号：%d\n", DBnum);
+    printf("　┣━　学生学号：%s\n", STU_ID);
+    printf("　┣━　学生姓名：%s\n", STU_name);
+    printf("　┗━　学生成绩：%d\n", STU_score);
+}
+
+// 层 5 - 数据库查询结束提示 - 自定义提示
+void printSearchEnd() {
+    printf("┌────────────────────────────────────────────────────────────────┐\n");
+    printf("│　　　　　　　　学生信息管理系统　－　数据库查询　　　　　　　　│\n");
+    printf("└────────────────────────────────────────────────────────────────┘\n");
+    printf("查询结束，如需修改维护指定学生信息请使用 数据库编号 进行精确定位修改。\n");
+}
+
+// 层 6 - 数据库编辑进入提示
+void printEditEntry() {
+    printf("┌────────────────────────────────────────────────────────────────┐\n");
+    printf("│　　　　　　　　学生信息管理系统　－　数据库查询　　　　　　　　│\n");
+    printf("└────────────────────────────────────────────────────────────────┘\n");
+    printf("查询结束，数据已定位。\n");
+    printf("是否进入编辑模式 [Y/N] ：\n");
+}
+
+// 层 6 - 数据库编辑 - 自定义提示
+void printEditTips(char name[33]) {
+    printf("┌────────────────────────────────────────────────────────────────┐\n");
+    printf("│　　　　　　　　学生信息管理系统　－　数据库编辑　　　　　　　　│\n");
+    printf("├────────────────────────────────────────────────────────────────┤\n");
+    printf("│　　　　　　　　　 [1] - 修改学生信息 　　　　　　　　　　　　│\n");
+    printf("│　　　　　　　　　 [2] - 删除学生信息 　　　　　　　　　　　　│\n");
+    printf("│　　　　　　　　　 [3] - 查看选中的学生信息 　　　　　　　　　│\n");
+    printf("│　　　　　　　　　 [0] - 退出修改 　　　　　　　　　　　　　　│\n");
+    printf("└────────────────────────────────────────────────────────────────┘\n");
+    printf("当前操作的数据库：%s\n", name);
+    printf("输入选项以继续: ");
+}
+
 int main() {
     // 层 1 - 用户输入
     int introInput = -1;
@@ -343,11 +434,11 @@ int main() {
                     do {
                         // 先把数据库录入到内存中
                         student[i].DB_ID = i + 1;
-                        printf("请输入第 %d / %d 个学生的 学号 ：", i + 1, studentSum);
+                        printf("请输入第 %d / %d 个学生的 学号 [长度限制32字符]：", i + 1, studentSum);
                         scanf("%s", student[i].STU_ID);
-                        printf("请输入第 %d / %d 个学生的 姓名 ：", i + 1, studentSum);
+                        printf("请输入第 %d / %d 个学生的 姓名 [长度限制64字符]：", i + 1, studentSum);
                         scanf("%s", student[i].STU_name);
-                        printf("请输入第 %d / %d 个学生的 成绩 ：", i + 1, studentSum);
+                        printf("请输入第 %d / %d 个学生的 成绩 [成绩应为整数]：", i + 1, studentSum);
                         scanf("%s", student[i].STU_score);
 
                         // 然后再输出录入的结果
@@ -373,6 +464,177 @@ int main() {
                     // 查找数据
 
                     // 第一步，获取这个数据库有多少东西
+                    int DBSum;
+                    DBSum = getFileLine(fp) - 2;
+
+                    // 第二步，告诉用户要输入什么
+                    int userInput;
+                    printSearchTips(DBinput);
+                    scanf("%d", &userInput);
+
+                    // 第三步，根据用户输入来进行对应的操作
+                    if(userInput == 1) {
+                        // 变量 - 搜索输入
+                        char searchInput[33];
+
+                        // 第一步，提醒用户你要输入什么
+                        printSearchInput(1);
+                        scanf("%s", searchInput);
+
+                        // 第二步，遍历所有信息并标记匹配项目
+                        fseek(fp, 10, SEEK_SET);            // 移动指针到数据库的第一条内容
+                        struct example temp;                // 作为临时存储的变量
+                        int searchResultPos[DBSum];         // 结果位置标记。有结果则为 1
+                        int searchResultSum = 0;            // 搜索结果数量存储
+                        int loopCount = 0;                  // 循环计数器
+
+                        // 通过这个循环来遍历所有的数据条目
+                        while(fscanf(fp, "[%d] - <%s> - {%s} - [%d]\n", temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score) != EOF) {
+                            // 如果这个数据条目和查询的条目重合则对条目进行标记
+                            if(temp.STU_ID == searchInput) {
+                                searchResultSum++;
+                                searchResultPos[loopCount] = 1;
+                            }
+                            loopCount++;
+                        }
+
+                        // 第三步，输出粗略的结果
+                        printSearchResult(searchResultSum);
+
+                        // 第四步，如果查询数量不为 0 的话询问是否展示详细信息
+                        // 如果只有一条信息则直接展示
+
+                        fseek(fp, 10, SEEK_SET);            // 指针定位到数据库开头
+
+                        if(searchResultSum == 1) {
+                            for(int i = 0; i <= DBSum; i++) {
+                                fscanf(fp, "[%d] - <%s> - {%s} - [%d]\n", temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score);
+                                if(searchResultPos[i] == 1) {
+                                    printSearchDetail(i + 1, searchResultSum, temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score);
+                                }
+                            }
+                        } else if(searchResultSum > 1) {
+                            char searchDetailInput;
+                            filter_YN(searchDetailInput);
+
+                            if(searchDetailInput == "Y") {
+                                for(int i = 0; i <= DBSum; i++) {
+                                    fscanf(fp, "[%d] - <%s> - {%s} - [%d]\n", temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score);
+                                    if(searchResultPos[i] == 1) {
+                                        printSearchDetail(i + 1, searchResultSum, temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score);
+                                    }
+                                }
+                            }
+                        }
+
+                        // 最后给个提示，修改数据请转到数据库编号查询
+                        printSearchEnd();
+                    } else if(userInput == 2) {
+                        // 变量 - 搜索输入
+                        char searchInput[65];
+
+                        // 第一步，提醒用户你要输入什么
+                        printSearchInput(2);
+                        scanf("%s", searchInput);
+
+                        // 第二步，遍历所有信息并标记匹配项目
+                        fseek(fp, 10, SEEK_SET);            // 移动指针到数据库的第一条内容
+                        struct example temp;                // 作为临时存储的变量
+                        int searchResultPos[DBSum];         // 结果位置标记。有结果则为 1
+                        int searchResultSum = 0;            // 搜索结果数量存储
+                        int loopCount = 0;                  // 循环计数器
+
+                        // 通过这个循环来遍历所有的数据条目
+                        while(fscanf(fp, "[%d] - <%s> - {%s} - [%d]\n", temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score) != EOF) {
+                            // 如果这个数据条目和查询的条目重合则对条目进行标记
+                            if(temp.STU_name == searchInput) {
+                                searchResultSum++;
+                                searchResultPos[loopCount] = 1;
+                            }
+                            loopCount++;
+                        }
+
+                        // 第三步，输出粗略的结果
+                        printSearchResult(searchResultSum);
+
+                        // 第四步，如果查询数量不为 0 的话询问是否展示详细信息
+                        // 如果只有一条信息则直接展示
+
+                        fseek(fp, 10, SEEK_SET);            // 指针定位到数据库开头
+
+                        if(searchResultSum == 1) {
+                            for(int i = 0; i <= DBSum; i++) {
+                                fscanf(fp, "[%d] - <%s> - {%s} - [%d]\n", temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score);
+                                if(searchResultPos[i] == 1) {
+                                    printSearchDetail(i + 1, searchResultSum, temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score);
+                                }
+                            }
+                        } else if(searchResultSum > 1) {
+                            char searchDetailInput;
+                            filter_YN(searchDetailInput);
+
+                            if(searchDetailInput == "Y") {
+                                for(int i = 0; i <= DBSum; i++) {
+                                    fscanf(fp, "[%d] - <%s> - {%s} - [%d]\n", temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score);
+                                    if(searchResultPos[i] == 1) {
+                                        printSearchDetail(i + 1, searchResultSum, temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score);
+                                    }
+                                }
+                            }
+                        }
+
+                        // 最后给个提示，修改数据请转到数据库编号查询
+                        printSearchEnd();
+                    } else if(userInput == 3) {
+                        // 这里是通过数据库 ID 进行精准定位，可以确保数据库 ID 唯一
+                        // 所以我们这里就只需要把指针归位
+                        // 然后根据用户输入指定读取多少次就可以了
+
+                        // 变量 - 搜索输入
+                        int searchInput;
+
+                        // 第一步，提醒用户你要输入什么
+                        printSearchInput(3);
+                        scanf("%d", searchInput);
+
+                        // 第二步，指针归位并转到指定的行
+                        for(int i = 0; i < searchInput; i++) {
+                            char buffer[256];
+                            fgets(buffer, 256, fp);
+                        }
+
+                        // 第三步，读入并输出数据
+                        struct example temp;
+                        if(fscanf(fp, "[%d] - <%s> - {%s} - [%d]\n", temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score) != EOF) {
+                            printSearchDetail(1, 1, temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score);
+
+                            // 第四步，读入用户操作
+                            char editEntryInput;
+                            printEditEntry();
+                            filter_YN(editEntryInput);
+
+                            if(editEntryInput == "Y") {
+                                // 进入对指定项目的编辑
+                                // 使用 do 循环达到每次操作完成后回到操作界面的能力
+
+                                int DBEditInput = -1;
+                                do {
+                                    // 打印提示并获取用户输入
+                                    printEditTips(DBinput);
+                                    scanf("%d", &DBEditInput);
+
+                                    if(DBEditInput == 1) {
+                                        // 修改指定的内容
+                                    } else if(DBEditInput == 2) {
+                                        // 删除指定的内容
+                                    } else if(DBEditInput == 3) {
+                                        // 查看当前选中的学生信息
+                                        printSearchDetail(1, 1, temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score);
+                                    }
+                                } while(DBEditInput != 0);
+                            }
+                        }
+                    }
                 } else if(editInput == 3) {
                     // 统计数据
                 }
