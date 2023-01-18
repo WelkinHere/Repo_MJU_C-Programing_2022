@@ -47,7 +47,7 @@
 
 ## 方法二
 
-逐行写入临时文件，遇到修改部分 修改后写入临时文件 完成后删除data.txt 然后将临时文件改名为data.txt 
+逐行写入临时文件，遇到修改部分 修改后写入临时文件 完成后删除data.txt 然后将临时文件改名为data.txt
 
     #include <stdio.h>
     #include <stdlib.h>
