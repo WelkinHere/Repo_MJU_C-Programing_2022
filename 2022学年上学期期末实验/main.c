@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 
 // 结构体 - 用于学生信息存储
 struct example {
@@ -47,49 +48,21 @@ long int getFileSize(FILE *fp) {
     return fileSize;            // 返回文件长度
 }
 
-// [Y/N] 过滤器
-// 参数：要过滤的字符变量
-void filter_YN(char userInput) {
-    int flag_InputValid = 0;    // 默认值为 0 ，用户输入合法的话就会变为 1
-
-    do{
-        scanf("%c", &userInput);
-
-        if(userInput == "Y") {
-            flag_InputValid = 1;
-        } else if (userInput == "N") {
-            flag_InputValid = 1;
-        } else if (userInput = "y") {
-            userInput = "Y";
-            flag_InputValid = 1;
-        } else if (userInput = "n") {
-            userInput = "N";
-            flag_InputValid = 1;
-        } else {
-            printInputInvalid(1);
-        }
-    } while(flag_InputValid == 1);
-}
-
 // 自定义输出 - 提示信息
 
 // 通用 - 输入不合法 - 自定义提示
 // 参数： 0 - 正常输入提示 / 1 - 确定[Y/N]输入提示
 void printInputInvalid(int tipStatus) {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　　　 输入不合法，请重新输入 　　　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
-    if(tipStatus == 0) {
-        printf("输入选项以继续: ");
-    } else if (tipStatus == 1) {
-        printf("输入选项以继续[Y/N]: ");
-    }
+    Sleep(1000);
 }
 
 // 层 1 - 提示信息 - 自定义提示
 void printIntro() {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　　　　　学生信息管理系统　　　　　　　　　　　　│\n");
     printf("├────────────────────────────────────────────────────────────────┤\n");
@@ -102,15 +75,16 @@ void printIntro() {
 
 // 层 1 - 退出信息 - 自定义提示
 void printOutro() {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　　　学生信息管理系统正在退出　　　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
+    Sleep(1000);
 }
 
 // 层 2 - 新数据库创建 - 自定义提示
 void printNewDB() {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　学生信息管理系统　－　新建数据库　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
@@ -119,7 +93,7 @@ void printNewDB() {
 
 // 层 2 - 打开数据库 - 自定义提示
 void printOpenDB() {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　学生信息管理系统　－　打开数据库　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
@@ -128,32 +102,35 @@ void printOpenDB() {
 
 // 层 3 - 创建数据库 失败 - 自定义提示
 void printNewFail() {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　创建数据库失败，请更换您的数据库名称　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
+    Sleep(1000);
 }
 
 // 层 3 - 创建数据库 成功 - 自定义提示
 void printNewSuccess() {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　创建数据库成功，请记住您的数据库名称　　　　　　　│\n");
-    printf("│　　　　　请注意，该操作不会清除已存在的同名数据库内容　　　　　│\n");
+    printf("│　　　　　 请注意，该操作会清除已存在的同名数据库内容 　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
+    Sleep(3000);
 }
 
 // 层 3 - 打开数据库 失败 - 自定义提示
 void printOpenFail() {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　打开数据库失败，请确认数据库名称是否正确　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
+    Sleep(1000);
 }
 
 // 层 3 - 打开数据库 成功 - 自定义提示
 void printOpenSuccess() {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　　　　　 打开数据库成功 　　　　　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
@@ -161,37 +138,28 @@ void printOpenSuccess() {
 
 // 层 4 - 数据库为空 - 自定义提示
 void printEditWarn() {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
-    printf("│　　　　　　　　学生信息管理系统　－　数据库操作　　　　　　　　│\n");
-    printf("├────────────────────────────────────────────────────────────────┤\n");
     printf("│　　　　　　　　　　　　检测到数据库为空　　　　　　　　　　　　│\n");
-    printf("│　　　　　　　　　　　　是否进入数据录入　　　　　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
-    printf("┌───────────────────────────────┐┌───────────────────────────────┐\n");
-    printf("│　　　　　　[Y]  是　　　　　　││　　　　　　[N]  否　　　　　　│\n");
-    printf("└───────────────────────────────┘└───────────────────────────────┘\n");
-    printf("输入选项以继续[Y/N]: ");
 }
 
 // 层 4 - 数据库操作 - 自定义提示
 void printEditHint(char name[33]) {
-    system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　学生信息管理系统　－　数据库操作　　　　　　　　│\n");
     printf("├────────────────────────────────────────────────────────────────┤\n");
-    printf("│　　　　　　　　 [1] - 向数据库末尾录入新内容 　　　　　　　　│\n");
-    printf("│　　　　　　　　 [2] - 查找或修改指定项目 　　　　　　　　　　│\n");
-    printf("│　　　　　　　　 [3] - 数据库统计信息 　　　　　　　　　　　　│\n");
-    printf("│　　　　　　　　 [0] - 关闭数据库 　　　　　　　　　　　　　　│\n");
+    printf("│　　　　　　　　 [1] - 向数据库末尾录入新内容 　　　　　　　　　│\n");
+    printf("│　　　　　　　　 [2] - 查找或修改指定项目 　　　　　　　　　　　│\n");
+    printf("│　　　　　　　　 [3] - 数据库统计信息 　　　　　　　　　　　　　│\n");
+    printf("│　　　　　　　　 [0] - 关闭数据库 　　　　　　　　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
     printf("当前操作的数据库：%s\n", name);
-    printf("输入选项以继续: ");
 }
 
 // 层 5 - 数据库录入 - 学生数量 - 自定义提示
 void printInputSum(char name[33]) {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　学生信息管理系统　－　数据库录入　　　　　　　　│\n");
     printf("├────────────────────────────────────────────────────────────────┤\n");
@@ -203,7 +171,7 @@ void printInputSum(char name[33]) {
 
 // 层 5 - 数据库录入 开始 - 自定义提示
 void printInputStart() {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　　　　　 数据库录入开始 　　　　　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
@@ -211,7 +179,7 @@ void printInputStart() {
 
 // 层 5 - 数据库录入 提示 - 自定义提示
 void printInputTip(char id[33], char name[65], int score) {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　　　　　请确认录入的数据　　　　　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
@@ -222,40 +190,42 @@ void printInputTip(char id[33], char name[65], int score) {
     printf("│　　　　　　　　　　　　是否录入本次数据　　　　　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
     printf("┌───────────────────────────────┐┌───────────────────────────────┐\n");
-    printf("│　　　　　　[Y]  是　　　　　　││　　　　　　[N]  否　　　　　　│\n");
+    printf("│　　　　　　[1]  是　　　　　　││　　　　　　[0]  否　　　　　　│\n");
     printf("└───────────────────────────────┘└───────────────────────────────┘\n");
-    printf("输入选项以继续[Y/N]: ");
+    printf("输入选项以继续[1/0]: ");
 
 }
 
 // 层 5 - 数据库录入 成功 - 自定义提示
 void printInputSuccess() {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　　　　　　录入数据成功　　　　　　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
+    Sleep(1000);
 }
 
 // 层 5 - 数据库录入 结束 - 自定义提示
 void printInputFinish() {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　　　　　 数据库录入结束 　　　　　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
+    Sleep(1000);
 }
 
 // 层 5 - 数据库查询 - 自定义提示
 void printSearchTips(char name[33]) {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　学生信息管理系统　－　数据库查询　　　　　　　　│\n");
     printf("├────────────────────────────────────────────────────────────────┤\n");
     printf("│　　　　　　　　　　　　请选择查询的方式　　　　　　　　　　　　│\n");
     printf("├────────────────────────────────────────────────────────────────┤\n");
-    printf("│　　　　　　　　　 [1] - 通过学号查询 　　　　　　　　　　　　│\n");
-    printf("│　　　　　　　　　 [2] - 通过姓名查询 　　　　　　　　　　　　│\n");
-    printf("│　　　　　　　　　 [3] - 通过数据库编号查询 　　　　　　　　　│\n");
-    printf("│　　　　　　　　　 [0] - 退出查询 　　　　　　　　　　　　　　│\n");
+    printf("│　　　　　　　　　 [1] - 通过学号查询 　　　　　　　　　　　　 │\n");
+    printf("│　　　　　　　　　 [2] - 通过姓名查询 　　　　　　　　　　　　 │\n");
+    printf("│　　　　　　　　　 [3] - 通过数据库编号查询 　　　　　　　　　 │\n");
+    printf("│　　　　　　　　　 [0] - 退出查询 　　　　　　　　　　　　　　 │\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
     printf("当前操作的数据库：%s\n", name);
     printf("输入选项以继续: ");
@@ -264,19 +234,19 @@ void printSearchTips(char name[33]) {
 // 层 5 - 数据库查询方式 - 自定义提示
 // 参数：1 - 学号查询内容 / 2 - 姓名查询内容 / 3 - 数据库编号查询
 void printSearchInput(int type) {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　学生信息管理系统　－　数据库查询　　　　　　　　│\n");
     printf("├────────────────────────────────────────────────────────────────┤\n");
 
     if(type == 1) {
-        printf("│　　　　　　　　　　　　　通过学号查询　　　　　　　　　　　　　│\n");
+        printf("│　　　　　　　　　　　　　通过学号查询　　　　　　　　　　　　　　│\n");
         printf("└────────────────────────────────────────────────────────────────┘\n");
     } else if (type == 2) {
-        printf("│　　　　　　　　　　　　　通过姓名查询　　　　　　　　　　　　　│\n");
+        printf("│　　　　　　　　　　　　　通过姓名查询　　　　　　　　　　　　　　│\n");
         printf("└────────────────────────────────────────────────────────────────┘\n");
     } else if (type == 3) {
-        printf("│　　　　　　　　　　　 通过数据库编号查询 　　　　　　　　　　　│\n");
+        printf("│　　　　　　　　　　　 通过数据库编号查询 　　　　　　　　　　　　│\n");
         printf("└────────────────────────────────────────────────────────────────┘\n");
     }
 
@@ -286,7 +256,7 @@ void printSearchInput(int type) {
 // 层 5 - 数据库查询结果 - 自定义提示
 // 参数：整形值，用于显示搜索结果数目
 void printSearchResult(int count) {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　学生信息管理系统　－　数据库查询　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
@@ -316,7 +286,7 @@ void printSearchEnd() {
 }
 
 // 层 6 - 数据库编辑进入提示
-void printEditEntry() {
+void printEditEntry() { 
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　学生信息管理系统　－　数据库查询　　　　　　　　│\n");
     printf("└────────────────────────────────────────────────────────────────┘\n");
@@ -326,7 +296,7 @@ void printEditEntry() {
 
 // 层 6 - 数据库编辑 - 自定义提示
 void printEditTips(char name[33]) {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　学生信息管理系统　－　数据库编辑　　　　　　　　│\n");
     printf("├────────────────────────────────────────────────────────────────┤\n");
@@ -341,7 +311,7 @@ void printEditTips(char name[33]) {
 
 // 层 6 - 数据库编辑 - 自定义提示
 void printEditContent(int EditID, int EditName, int EditScore) {
-    system("cls");
+    // system("cls");
     printf("┌────────────────────────────────────────────────────────────────┐\n");
     printf("│　　　　　　　　学生信息管理系统　－　数据库编辑　　　　　　　　│\n");
     printf("├────────────────────────────────────────────────────────────────┤\n");
@@ -445,23 +415,13 @@ int main() {
 
             // 这里套个 do while 循环，来实现操作结束后重复返回编辑界面的能力
             do {
-                // 检测文件长度，如果文件为空的话直接进入数据录入
-                // 不为空的话输出编辑提示
+                // 检测文件长度，如果文件为空的话输出警告
                 if(getFileSize(fp) == 0) {
-                    char userInput;                 // 用户在确认进入数据录入环节的输入
-
                     printEditWarn();
-                    filter_YN(userInput);           // 过滤确定和取消
-
-                    // 如果用户输入的是 Y 则进入数据录入（直接修改用户的输入进入编辑模式）
-                    // 用户输入的是 N 的话手动补充一个界面提示
-                    if(userInput == "Y") {
-                        editInput = 1;
-                    } else {
-                        printEditHint(DBinput);
-                        scanf("%d", &editInput);
-                    }
+                    printEditHint(DBinput);
+                    scanf("%d", &editInput);
                 } else {
+                    // system("cls");
                     printEditHint(DBinput);
                     scanf("%d", &editInput);
                 }
@@ -476,55 +436,76 @@ int main() {
 
                     // 提示操作并获取要录入的学生总数
                     printInputSum(DBinput);
-                    scanf("%d", &studentSum);
 
-                    // 初始化结构体数组
-                    // 用于录入学生信息的临时存储
-                    struct example student[studentSum];
+                    int flag_studentCountValid = 0;
 
-                    // 如果数据库为空则录入一下格式模板
-                    if(getFileSize(fp) == 0) {
-                        fprintf(fp, "- Start -\n");     // 文件开头
-                        fprintf(fp, "-  End  -");       // 文件结尾
-                    } else {
-                        // 不为空的话我们初始化一下所有的信息
-                        // 比如数据库内已经有了多少数据
-                        DBSum = getFileLine(fp) - 2;             // 最后删除掉格式里面的开头结尾
-                    }
+                    do {
+                        scanf("%d", &studentSum);
+
+                        if (studentSum > 0) {
+                            flag_studentCountValid = 1;
+                        } else {
+                            printInputInvalid(0);
+                        }
+                    } while(flag_studentCountValid != 1);
 
                     printInputStart();
+
+                    // 获取数据库已有内容数量
+                    // 获取文件行数
+                    int fileLine = -1;
+                    if(getFileSize(fp) != 0) {
+                        fileLine = getFileLine(fp);
+                        printf("当前数据库内含有 %d 条数据。\n");
+                    }
 
                     // 循环获取录入的学生数据
                     int i = 0; // 循环计数器
                     do {
+                        // 变量
+                        int DB_ID;          // 数据库编号
+                        char STU_ID[33];    // 学生学号
+                        char STU_name[65];  // 学生姓名
+                        int STU_score = -1;      // 学生成绩
+
                         // 先把数据库录入到内存中
-                        student[i].DB_ID = i + 1;
+                        DB_ID = i + 1;
                         printf("请输入第 %d / %d 个学生的 学号 [长度限制32字符]：", i + 1, studentSum);
-                        scanf("%s", student[i].STU_ID);
+                        scanf("%s", STU_ID);
                         printf("请输入第 %d / %d 个学生的 姓名 [长度限制64字符]：", i + 1, studentSum);
-                        scanf("%s", student[i].STU_name);
-                        printf("请输入第 %d / %d 个学生的 成绩 [成绩应为整数]：", i + 1, studentSum);
-                        scanf("%s", student[i].STU_score);
+                        scanf("%s", STU_name);
+                        do {
+                            printf("请输入第 %d / %d 个学生的 成绩 [成绩应为整数]：", i + 1, studentSum);
+                            scanf("%d", &STU_score);
+                            if(STU_score < 0) {
+                                printInputInvalid(0);
+                            }
+                        } while (STU_score < 0);
 
                         // 然后再输出录入的结果
-                        printInputTip(student[i].STU_ID, student[i].STU_name, student[i].STU_score);
+// 不止这里出问题
+                        printInputTip(STU_ID, STU_name, STU_score);
 
                         // 询问用户是否保留此次数据
-                        char userInput;
-                        filter_YN(userInput);
+                        int userInput;
+                        scanf("%d", &userInput);
 
-                        if(userInput == "Y") {
-                            fseek(fp, 9, SEEK_END);             // 移动指针位置到达 “-  End  -” 前面
-                            fprintf(fp, "[%d] - <%s> {%s} [%d]\n", i + DBSum + 1, student[i].STU_ID, student[i].STU_name, student[i].STU_score);
+                        if(userInput == 1) {
+                            fseek(fp, 0, SEEK_END);
+                            fprintf(fp, "[%d] - <%s> {%s} [%d]\n", i + DBSum + 1, STU_ID, STU_name, STU_score);
 
                             // 成功后输出提示并给循环计数器 +1
                             printInputSuccess();
                             i++;
-                        }   // 如果选择不保留则重新开始循环
-                    } while(i < studentSum - 1);
+                        } else {
+                            STU_score = -1;
+                        }
+                    } while(i < studentSum);
 
                     // 录入结束的时候输出消息
                     printInputFinish();
+                    fclose(fp);
+                    fp = fopen(DBinput, "r+");
                 } else if(editInput == 2) {
                     // 查找数据
 
@@ -547,7 +528,7 @@ int main() {
                         scanf("%s", searchInput);
 
                         // 第二步，遍历所有信息并标记匹配项目
-                        fseek(fp, 10, SEEK_SET);            // 移动指针到数据库的第一条内容
+                        fseek(fp, 0, SEEK_SET);            // 移动指针到数据库的第一条内容
                         struct example temp;                // 作为临时存储的变量
                         int searchResultPos[DBSum];         // 结果位置标记。有结果则为 1
                         int searchResultSum = 0;            // 搜索结果数量存储
@@ -569,7 +550,7 @@ int main() {
                         // 第四步，如果查询数量不为 0 的话询问是否展示详细信息
                         // 如果只有一条信息则直接展示
 
-                        fseek(fp, 10, SEEK_SET);            // 指针定位到数据库开头
+                        fseek(fp, 0, SEEK_SET);            // 指针定位到数据库开头
 
                         if(searchResultSum == 1) {
                             for(int i = 0; i <= DBSum; i++) {
@@ -579,10 +560,10 @@ int main() {
                                 }
                             }
                         } else if(searchResultSum > 1) {
-                            char searchDetailInput;
-                            filter_YN(searchDetailInput);
+                            int searchDetailInput;
+                            scanf("%d", &searchDetailInput);
 
-                            if(searchDetailInput == "Y") {
+                            if(searchDetailInput == 1) {
                                 for(int i = 0; i <= DBSum; i++) {
                                     fscanf(fp, "[%d] - <%s> - {%s} - [%d]\n", temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score);
                                     if(searchResultPos[i] == 1) {
@@ -603,7 +584,7 @@ int main() {
                         scanf("%s", searchInput);
 
                         // 第二步，遍历所有信息并标记匹配项目
-                        fseek(fp, 10, SEEK_SET);            // 移动指针到数据库的第一条内容
+                        fseek(fp, 0, SEEK_SET);            // 移动指针到数据库的第一条内容
                         struct example temp;                // 作为临时存储的变量
                         int searchResultPos[DBSum];         // 结果位置标记。有结果则为 1
                         int searchResultSum = 0;            // 搜索结果数量存储
@@ -625,7 +606,7 @@ int main() {
                         // 第四步，如果查询数量不为 0 的话询问是否展示详细信息
                         // 如果只有一条信息则直接展示
 
-                        fseek(fp, 10, SEEK_SET);            // 指针定位到数据库开头
+                        fseek(fp, 0, SEEK_SET);            // 指针定位到数据库开头
 
                         if(searchResultSum == 1) {
                             for(int i = 0; i <= DBSum; i++) {
@@ -635,10 +616,10 @@ int main() {
                                 }
                             }
                         } else if(searchResultSum > 1) {
-                            char searchDetailInput;
-                            filter_YN(searchDetailInput);
+                            int searchDetailInput;
+                            scanf("%d", &searchDetailInput);
 
-                            if(searchDetailInput == "Y") {
+                            if(searchDetailInput == 1) {
                                 for(int i = 0; i <= DBSum; i++) {
                                     fscanf(fp, "[%d] - <%s> - {%s} - [%d]\n", temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score);
                                     if(searchResultPos[i] == 1) {
@@ -660,7 +641,7 @@ int main() {
 
                         // 第一步，提醒用户你要输入什么
                         printSearchInput(3);
-                        scanf("%d", searchInput);
+                        scanf("%d", &searchInput);
 
                         // 第二步，指针归位并转到指定的行
                         for(int i = 0; i < searchInput; i++) {
@@ -674,11 +655,11 @@ int main() {
                             printSearchDetail(1, 1, temp.DB_ID, temp.STU_ID, temp.STU_name, temp.STU_score);
 
                             // 第四步，读入用户操作
-                            char editEntryInput;
+                            int editEntryInput;
                             printEditEntry();
-                            filter_YN(editEntryInput);
+                            scanf("%d", &editEntryInput);
 
-                            if(editEntryInput == "Y") {
+                            if(editEntryInput == 1) {
                                 // 进入对指定项目的编辑
                                 // 使用 do 循环达到每次操作完成后回到操作界面的能力
 
@@ -723,7 +704,7 @@ int main() {
 
                                                 // 然后把原先文件的内容给加载到新的缓存文件内
                                                 for(int i = 0; i < searchInput; i++) {
-
+                                                    
                                                 }
                                             }
                                         } while(DBEditContentInput != 0);
