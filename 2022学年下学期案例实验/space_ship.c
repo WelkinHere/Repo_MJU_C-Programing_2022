@@ -42,7 +42,7 @@ int main() {
                 int plane_fireFlag = 0;             // 飞船发射标识符
                 int player_score = 0;               // 玩家得分
 
-                int enemy_alive = 1;// 敌人存活biao'ji
+                int enemy_alive = 1;// 敌人存活标记
                 int enemy_pos_x;    // 敌人所在 x 轴
                 int enemy_pos_y;    // 敌人所在 y 轴
 
