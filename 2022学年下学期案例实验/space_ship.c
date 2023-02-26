@@ -37,14 +37,14 @@ int main() {
             case 1:
                 {// 这里是不希望把初始的位置弄乱，拉一个临时的值出来
 
-                plane_x = 13;        // 飞船所在 x 轴
-                plane_y = 34;        // 飞船所在 y 轴
+                plane_x = 13;                       // 飞船所在 x 轴
+                plane_y = 34;                       // 飞船所在 y 轴
                 int plane_fireFlag = 0;             // 飞船发射标识符
                 int player_score = 0;               // 玩家得分
 
-                int enemy_alive = 1;// 敌人存活标记
-                int enemy_pos_x;    // 敌人所在 x 轴
-                int enemy_pos_y;    // 敌人所在 y 轴
+                int enemy_alive = 1;                // 敌人存活标记
+                int enemy_pos_x;                    // 敌人所在 x 轴
+                int enemy_pos_y;                    // 敌人所在 y 轴
 
                 int leaveFlag = 0;
 

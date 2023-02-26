@@ -44,7 +44,7 @@ int main() {
             int ball_height = ball_start_height;        // 画图用小球水平位置
             int ball_weight = ball_start_weight;        // 画图用小球垂直位置
             int ball_move_x = 1;                        // 画图用小球水平动量方向
-            int ball_move_y = 1;                       // 画图用小球垂直动量方向
+            int ball_move_y = 1;                        // 画图用小球垂直动量方向
 
             // 画图循环部分
             while (1) {
@@ -103,8 +103,8 @@ int main() {
                 }
 
                 // 按键获取 - 在按下 ESC 的时候退出画图循环
-                if(kbhit()) {
-                    input_cache = getch();
+                if(_kbhit()) {
+                    input_cache = _getch();
                     if(input_cache == 27) {break;}
                     if((input_cache == 95 && sleepTime < 2000) || (input_cache == 45 && sleepTime < 2000)) {sleepTime += 10;}
                     if((input_cache == 43 && sleepTime > 15) || (input_cache == 61 && sleepTime > 15)) {sleepTime -= 10;}
