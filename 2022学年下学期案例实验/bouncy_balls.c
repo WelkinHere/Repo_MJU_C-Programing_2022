@@ -63,6 +63,7 @@ int main() {
                         for(int i = 0; i < field_weight; i++) {printf("──");}
                         printf("┘\n");
                         printf("Press ESC to exit.\nPress \"+\" to increase the speed,\nPress \"-\" to decrease the speed.\n");
+                        printf("\nDebug Info:\nKey Pressed: %d, Ball Position: (%d, %d)", input_cache, ball_weight, ball_height);
                     } else {
                         printf("│");
                         for(int i = 0; i < field_weight; i++) {
