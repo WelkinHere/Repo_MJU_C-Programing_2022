@@ -210,7 +210,7 @@ int main() {
             for (int j = ball_y - 1; j <= ball_y + 1; j++) {
                 gotoXY(i, j);
                 if (i == brick_x && j == brick_y) {
-                    printf("▩");
+                    printf("■");
                 } else if (i < game_left + 1) {
                     printf("█");
                 } else if (i > game_right - 1) {
@@ -231,13 +231,13 @@ int main() {
         gotoXY(paddle_x - 1, paddle_y);
         printf(" ");
         for (int i = 0; i < paddle_width; i++) {
-            printf("▬");
+            printf("▰");
         }
         printf(" ");
 
         // 绘制砖块
         gotoXY(brick_x, brick_y);
-        printf("▩");
+        printf("■");
 
         // 绘制分数
         gotoXY(game_right + 5, game_top);
