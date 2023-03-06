@@ -231,7 +231,7 @@ int main() {
         gotoXY(paddle_x - 1, paddle_y);
         printf(" ");
         for (int i = 0; i < paddle_width; i++) {
-            printf("▰");
+            printf("▬");
         }
         printf(" ");
 
